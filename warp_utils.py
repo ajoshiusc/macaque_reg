@@ -109,7 +109,6 @@ def get_grid(moving_shape, target_shape, requires_grad=False):
 def apply_warp(disp_field, moving_image, target_image, interp_mode='bilinear'):
     # disp_field size should be Bx3xWxHxD
     # moving_image and target_image size should be BxCxWxHxD
-    # B=batch size, C=num channels, W=width, H=height, and D=depth
 
     ref_grid = get_grid(moving_image.shape[2:], target_image.shape[2:])
 
