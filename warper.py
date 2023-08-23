@@ -12,7 +12,6 @@ from monai.transforms import (
     EnsureChannelFirst,
     ScaleIntensityRangePercentiles,
 )
-from monai.data.nifti_writer import write_nifti
 from monai.losses.ssim_loss import SSIMLoss
 from monai.losses import (
     GlobalMutualInformationLoss,
@@ -93,7 +92,9 @@ class Warper:
         warped_labels = apply_warp(
             self.ddf[None,], label[None,], self.target[None,], interp_mode="nearest"
         )
-        write_nifti(warped_labels[0, 0], output_label_file, affine=self.target.affine)
+        #write_nifti(warped_labels[0, 0], output_label_file, affine=self.target.affine)
+        nib.save(nib.Nifti1Image(warped_labels[0, 0].detach().cpu().numpy(), self.target.affine), output_label_file,
+            )
 
     def nonlinear_reg(
         self,

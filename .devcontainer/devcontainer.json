@@ -1,5 +1,20 @@
 {
   "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {
-  }
+  "features": {},
+  "postCreateCommand": "pip install -r /workspaces/macaque_reg/requirements.txt",
+  "mounts": [
+    "source=/deneb_disk/macaque_atlas_data,target=/deneb_disk/macaque_atlas_data,type=bind,consistency=cached"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ]
+    },
+  },
+  "runArgs": [
+    "--gpus",
+    "all"
+  ]
 }
